@@ -17,6 +17,7 @@ from .form_pkl_car import form_pkl_car
 from .form_relative import form_relative
 from .form_roads_clean import form_roads_clean
 from .form_visualization_clean import form_visualization_clean
+from .form_visualization_clean_h import form_visualization_clean_h
 
 
 class AccessibilityTools(QWidget):
@@ -46,23 +47,25 @@ class AccessibilityTools(QWidget):
         self.item2 = QTreeWidgetItem(group1, ['Road database'])
         self.item20 = QTreeWidgetItem(
             group1, ['Buidings and visuailization database'])
+        #self.item19 = QTreeWidgetItem(
+        #    group1, ['Buidings and visuailization database (hexagon)'])
         self.item3 = QTreeWidgetItem(group1, ['Transit routing database'])
         self.item17 = QTreeWidgetItem(group1, ['Car routing database'])
 
         group2 = QTreeWidgetItem(self.tree_widget, ['Transit accessibility'])
         group2.setExpanded(True)
-        group3 = QTreeWidgetItem(group2, ['Service area'])
+        group3 = QTreeWidgetItem(group2, ['Service area maps'])
         self.item4 = QTreeWidgetItem(
             group3, ['From service locations – Fixed-time departure'])
         self.item5 = QTreeWidgetItem(
             group3, ['From service locations – Schedule-based departure'])
         self.item6 = QTreeWidgetItem(
-            group3, ['To location – Fixed-time arrival'])
+            group3, ['To service location – Fixed-time arrival'])
         self.item7 = QTreeWidgetItem(
-            group3, ['To location – Schedule-based arrival'])
+            group3, ['To service location – Schedule-based arrival'])
         group3.setExpanded(True)
 
-        group4 = QTreeWidgetItem(group2, ['Region'])
+        group4 = QTreeWidgetItem(group2, ['Region maps'])
         self.item8 = QTreeWidgetItem(
             group4, ['From every location – Fixed-time departure'])
         self.item9 = QTreeWidgetItem(
@@ -74,15 +77,15 @@ class AccessibilityTools(QWidget):
         group4.setExpanded(True)
 
         group5 = QTreeWidgetItem(self.tree_widget, ['Car accessibility'])
-        group8 = QTreeWidgetItem(group5, ['Service area'])
+        group8 = QTreeWidgetItem(group5, ['Service area maps'])
         self.item12 = QTreeWidgetItem(
             group8, ['From service locations – Fixed-time departure'])
         self.item13 = QTreeWidgetItem(
-            group8, ['To location – Fixed-time arrival'])
+            group8, ['To service location – Fixed-time arrival'])
         group5.setExpanded(True)
         group8.setExpanded(True)
 
-        group6 = QTreeWidgetItem(group5, ['Region'])
+        group6 = QTreeWidgetItem(group5, ['Region maps'])
         self.item14 = QTreeWidgetItem(
             group6, ['From every location – Fixed-time departure'])
         self.item15 = QTreeWidgetItem(
@@ -151,6 +154,11 @@ class AccessibilityTools(QWidget):
                 title="Constructing databases. Buidings and visuailization database")
             visualization_clean.exec_()
 
+        #if item == self.item19:
+        #    visualization_clean_h = form_visualization_clean_h(
+        #        title="Constructing databases. Buidings and visuailization database (hexagon)")
+        #    visualization_clean_h.exec_()    
+
         if item == self.item3:
             pkl = form_pkl(
                 title="Constructing databases. Transit routing database")
@@ -166,7 +174,7 @@ class AccessibilityTools(QWidget):
         if item == self.item4:
             raptor_detailed = RaptorDetailed(self, mode=1,
                                              protocol_type=2,
-                                             title="Transit accessibility. Service area. From service locations – Fixed-time departure",
+                                             title="Transit accessibility. Service area maps. From service locations – Fixed-time departure",
                                              timetable_mode=False)
             raptor_detailed.textInfo.setPlainText("")
             raptor_detailed.show()
@@ -174,7 +182,7 @@ class AccessibilityTools(QWidget):
         if item == self.item5:
             raptor_detailed = RaptorDetailed(self, mode=1,
                                              protocol_type=2,
-                                             title="Transit accessibility. Service area. From service locations – Schedule-based departure",
+                                             title="Transit accessibility. Service area maps. From service locations – Schedule-based departure",
                                              timetable_mode=True)
             raptor_detailed.textInfo.setPlainText("")
             raptor_detailed.show()
@@ -182,7 +190,7 @@ class AccessibilityTools(QWidget):
         if item == self.item6:
             raptor_detailed = RaptorDetailed(self, mode=2,
                                              protocol_type=2,
-                                             title="Transit accessibility. Service area. To location – Fixed-time arrival",
+                                             title="Transit accessibility. Service area maps. To service location – Fixed-time arrival",
                                              timetable_mode=False)
             raptor_detailed.textInfo.setPlainText("")
             raptor_detailed.show()
@@ -190,7 +198,7 @@ class AccessibilityTools(QWidget):
         if item == self.item7:
             raptor_detailed = RaptorDetailed(self, mode=2,
                                              protocol_type=2,
-                                             title="Transit accessibility. Service area. To location – Schedule-based arrival",
+                                             title="Transit accessibility. Service area maps. To service location – Schedule-based arrival",
                                              timetable_mode=True)
             raptor_detailed.textInfo.setPlainText("")
             raptor_detailed.show()
@@ -198,7 +206,7 @@ class AccessibilityTools(QWidget):
         if item == self.item8:
             raptor_summary = RaptorSummary(self, mode=1,
                                            protocol_type=1,
-                                           title="Transit accessibility. Region. From every location – Fixed-time departure",
+                                           title="Transit accessibility. Region maps. From every location – Fixed-time departure",
                                            timetable_mode=False
                                            )
             raptor_summary.textInfo.setPlainText("")
@@ -207,7 +215,7 @@ class AccessibilityTools(QWidget):
         if item == self.item9:
             raptor_summary = RaptorSummary(self, mode=1,
                                            protocol_type=1,
-                                           title="Transit accessibility. Region. From every location – Schedule-based departure",
+                                           title="Transit accessibility. Region maps. From every location – Schedule-based departure",
                                            timetable_mode=True)
             raptor_summary.textInfo.setPlainText("")
             raptor_summary.show()
@@ -215,7 +223,7 @@ class AccessibilityTools(QWidget):
         if item == self.item10:
             raptor_summary = RaptorSummary(self, mode=2,
                                            protocol_type=1,
-                                           title="Transit accessibility. Region. To every location – Fixed-time arrival",
+                                           title="Transit accessibility. Region maps. To every location – Fixed-time arrival",
                                            timetable_mode=False)
             raptor_summary.textInfo.setPlainText("")
             raptor_summary.show()
@@ -223,7 +231,7 @@ class AccessibilityTools(QWidget):
         if item == self.item11:
             raptor_summary = RaptorSummary(self, mode=2,
                                            protocol_type=1,
-                                           title="Transit accessibility. Region. To every location – Schedule-based arrival",
+                                           title="Transit accessibility. Region maps. To every location – Schedule-based arrival",
                                            timetable_mode=True)
             raptor_summary.textInfo.setPlainText("")
             raptor_summary.show()
@@ -231,28 +239,28 @@ class AccessibilityTools(QWidget):
         if item == self.item12:
             car_accessibility = CarAccessibility(mode=1,
                                                  protocol_type=2,
-                                                 title="Car accessibility. Service area. From service locations – Fixed-time departure")
+                                                 title="Car accessibility. Service area maps. From service locations – Fixed-time departure")
             # car_accessibility.textInfo.setPlainText("Sample description car accessibility")
             car_accessibility.show()
 
         if item == self.item13:
             car_accessibility = CarAccessibility(mode=2,
                                                  protocol_type=2,
-                                                 title="Car accessibility. Service area. To location – Fixed-time arrival")
+                                                 title="Car accessibility. Service area maps. To service location – Fixed-time arrival")
             # car_accessibility.textInfo.setPlainText("Sample description car accessibility")
             car_accessibility.show()
 
         if item == self.item14:
             car_accessibility = CarAccessibility(mode=1,
                                                  protocol_type=1,
-                                                 title="Car accessibility. Region. From every location – Fixed-time departure")
+                                                 title="Car accessibility. Region maps. From every location – Fixed-time departure")
             # car_accessibility.textInfo.setPlainText("Sample description car accessibility")
             car_accessibility.show()
 
         if item == self.item15:
             car_accessibility = CarAccessibility(mode=2,
                                                  protocol_type=1,
-                                                 title="Car accessibility. Region. To every location – Fixed-time arrival")
+                                                 title="Car accessibility. Region maps. To every location – Fixed-time arrival")
             # car_accessibility.textInfo.setPlainText("Sample description car accessibility")
             car_accessibility.show()
 
